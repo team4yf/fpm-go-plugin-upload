@@ -75,8 +75,8 @@ func init() {
 			}
 		}
 
-		app.SetStatic(options.Base, option.Dir)
-		app.BindHandler("download/{filename}", func(c *ctx.Ctx, fpm *fpm.Fpm) {
+		app.SetStatic(options.Base, options.Dir)
+		app.BindHandler("/download/{filename}", func(c *ctx.Ctx, fpm *fpm.Fpm) {
 			filename := c.Param("filename")
 			filepath := options.Dir + filename
 			file, err := os.Open(filepath)
@@ -136,7 +136,7 @@ func init() {
 					fileRspArr[idx] = uploadRsp
 					continue
 				}
-				f, err := os.OpenFile(dest, os.O_WRONLY|os.O_CREATE, 0666) // 此处假设当前目录下已存在test目录
+				f, err := os.OpenFile(dest, os.O_WRONLY|os.O_CREATE, 0666)
 				if err != nil {
 					uploadRsp.Errno = -4
 					uploadRsp.Error = err.Error()
