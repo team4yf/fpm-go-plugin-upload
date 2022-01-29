@@ -32,11 +32,11 @@ type UploadData struct {
 
 //UploadRsp the response for upload
 type UploadRsp struct {
-	URL      string `json:"url"`
-	Errno    int    `json:"errno"`
-	Uploaded bool   `json:"uploaded"`
-	Error    string `json:"error,omitempty"`
-	Data     *UploadData
+	URL      string      `json:"url"`
+	Errno    int         `json:"errno"`
+	Uploaded bool        `json:"uploaded"`
+	Error    string      `json:"error,omitempty"`
+	Data     *UploadData `json:"data,omitempty"`
 }
 
 func init() {
@@ -132,7 +132,7 @@ func init() {
 				}
 				if !accept {
 					uploadRsp.Errno = -3
-					uploadRsp.Error = "file type not accepted"
+					uploadRsp.Error = fmt.Sprintf("file type: [%s] not accepted", mime)
 					fileRspArr[idx] = uploadRsp
 					continue
 				}
