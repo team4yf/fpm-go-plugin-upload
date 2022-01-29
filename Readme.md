@@ -1,7 +1,19 @@
 # fpm-go-plugin-upload
 
+## Configuration
 
-```sh
-curl -F 'upload=@/home/wangfan/Downloads/Cubes_vector_1920x1080.jpg' -F 'upload=@/home/wangfan/Pictures/snap1.png' localhost:9090/upload
-
+```yaml
+upload:
+  dir: "public/uploads/"
+  field: "upload"
+  base: "/uploads/"
+  uploadRouter: "/upload"
+  accept:
+    - "application/octet-stream"
+    - "application/json"
+    - "application/zip"
+    - "application/x-zip-compressed"
+    - "image/png"
+    - "image/jpeg"
+  limit: 100
 ```

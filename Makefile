@@ -2,8 +2,6 @@ PROJECTNAME=$(shell basename "$(PWD)")
 GOBASE=$(shell pwd)
 GOBIN=$(GOBASE)/bin
 
-all: install build docker-build docker-push
-
 install:
 	go mod download
 

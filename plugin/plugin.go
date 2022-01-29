@@ -26,16 +26,16 @@ type Options struct {
 }
 
 type UploadData struct {
-	Hash string
-	Path string
+	Hash string `json:"hash,omitempty"`
+	Path string `json:"path,omitempty"`
 }
 
 //UploadRsp the response for upload
 type UploadRsp struct {
-	URL      string
-	Errno    int
-	Uploaded bool
-	Error    string
+	URL      string `json:"url"`
+	Errno    int    `json:"errno"`
+	Uploaded bool   `json:"uploaded"`
+	Error    string `json:"error,omitempty"`
 	Data     *UploadData
 }
 
@@ -59,7 +59,7 @@ func init() {
 		}
 		if app.HasConfig("upload") {
 			if err := app.FetchConfig("upload", &options); err != nil {
-				panic(fmt.Errorf("Load Upload Config Error: %v", err))
+				panic(err)
 			}
 		}
 
@@ -176,15 +176,5 @@ func init() {
 			})
 
 		}).Methods("POST")
-
-		bizModule := make(fpm.BizModule, 0)
-
-		bizModule["send"] = func(param *fpm.BizParam) (data interface{}, err error) {
-			data = 1
-			return
-		}
-
-		app.AddBizModule("upload", &bizModule)
-
 	})
 }
